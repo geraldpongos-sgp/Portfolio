@@ -79,7 +79,7 @@ export default function Projects() {
             >
               {isEditing && (
                 <RemoveButton
-                  className="absolute top-2 right-2 z-30 w-7 h-7"
+                  className="absolute top-2 right-2 !z-40 w-7 h-7"
                   onClick={() =>
                     update((d) => ({ ...d, projects: d.projects.filter((p) => p.id !== project.id) }))
                   }
@@ -123,11 +123,11 @@ export default function Projects() {
                   <EditableText
                     as="h4"
                     value={project.title}
-                    className="text-lg font-bold text-[#f5efe4]"
+                    className="text-lg font-bold text-[#f5efe4] truncate block"
                     onCommit={(v) => updateProject(project.id, { title: v })}
                   />
                 ) : (
-                  <h4 className="text-lg font-bold text-[#f5efe4]">{project.title}</h4>
+                  <h4 className="text-lg font-bold text-[#f5efe4] truncate">{project.title}</h4>
                 )}
                 {isEditing ? (
                   <EditableText
