@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), Inter, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-display: var(--font-anton), sans-serif;
+  --font-script: var(--font-script), cursive;
+
+  --color-gold-100: #fdf3d7;
+  --color-gold-300: #f3d38a;
+  --color-gold-400: #e8b654;
+  --color-gold-500: #d69c2b;
+  --color-gold-600: #b8811f;
+  --color-ink: #050403;
+  --color-ink-soft: #0d0b09;
+  --color-ink-card: #14100c;
+  --color-ink-border: #2a231a;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 25s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+:root {
+  --background: #050403;
+  --foreground: #f5efe4;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 116px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #e8b654;
+  color: #050403;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050403;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a231a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8811f;
+}
+
+/* Gold gradient text used for accent script names / highlighted words */
+.gold-text {
+  background: linear-gradient(115deg, #fdf3d7 0%, #e8b654 35%, #b8811f 70%, #e8b654 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gold gradient fill used for solid CTA buttons */
+.gold-fill {
+  background: linear-gradient(135deg, #f3d38a 0%, #d69c2b 55%, #b8811f 100%);
+}
+
+.gold-border {
+  border: 1px solid transparent;
+  background-image: linear-gradient(#050403, #050403), linear-gradient(120deg, #e8b654, #b8811f);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* Topographic contour-line background, tiled across dark sections */
+.topo-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23e8b654' stroke-width='1'%3E%3Cpath d='M20 60 Q 120 10, 220 60 T 420 60'/%3E%3Cpath d='M-20 140 Q 90 90, 190 140 T 400 130'/%3E%3Cpath d='M0 220 Q 110 170, 210 220 T 430 210'/%3E%3Cpath d='M10 300 Q 130 250, 230 300 T 420 290'/%3E%3Cpath d='M-10 380 Q 100 330, 210 380 T 410 370'/%3E%3Ccircle cx='340' cy='90' r='60'/%3E%3Ccircle cx='340' cy='90' r='90'/%3E%3Ccircle cx='60' cy='260' r='40'/%3E%3Ccircle cx='60' cy='260' r='70'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 420px 420px;
+  opacity: 0.08;
+}
+
+/* Dot-grid accent pattern used in section corners */
+.dot-grid {
+  background-image: radial-gradient(rgba(232, 182, 84, 0.35) 1px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+/* Diagonal crosshatch accent line pair, echoing the reference design's corner marks */
+.cross-mark {
+  position: relative;
+}
+.cross-mark::before,
+.cross-mark::after {
+  content: "";
+  position: absolute;
+  background: rgba(232, 182, 84, 0.25);
+}
+.cross-mark::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: rotate(18deg);
+}
+.cross-mark::after {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: rotate(18deg);
+}
+
+.thumb-stack-item {
+  position: relative !important;
+}
+.thumb-stack-item:nth-child(1) { z-index: 20 !important; }
+.thumb-stack-item:nth-child(2) { z-index: 19 !important; }
+.thumb-stack-item:nth-child(3) { z-index: 18 !important; }
+.thumb-stack-item:nth-child(4) { z-index: 17 !important; }
+.thumb-stack-item:nth-child(5) { z-index: 16 !important; }
+.thumb-stack-item:nth-child(6) { z-index: 15 !important; }
