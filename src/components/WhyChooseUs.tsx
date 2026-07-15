@@ -32,7 +32,14 @@ export default function WhyChooseUs() {
   const update = useUpdatePortfolioData();
   const blobConfigured = useBlobConfigured();
   const { whyChooseUs, whyChooseUsSubtitle } = portfolioData;
+  const heading = portfolioData.sectionHeadings.whyChooseUs;
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const updateHeading = (patch: Partial<typeof heading>) =>
+    update((d) => ({
+      ...d,
+      sectionHeadings: { ...d.sectionHeadings, whyChooseUs: { ...d.sectionHeadings.whyChooseUs, ...patch } },
+    }));
 
   if (whyChooseUs.length === 0 && !isEditing) return null;
 
@@ -68,7 +75,27 @@ export default function WhyChooseUs() {
             <div className="h-px bg-[#2a231a] flex-grow" />
           </div>
           <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl tracking-tight text-[#f5efe4]">
-            <span className="gold-text">Projects</span>
+            {isEditing ? (
+              <>
+                <EditableText
+                  as="span"
+                  value={heading.plain}
+                  placeholder=""
+                  onCommit={(v) => updateHeading({ plain: v })}
+                />{" "}
+                <EditableText
+                  as="span"
+                  className="gold-text"
+                  value={heading.accent}
+                  onCommit={(v) => updateHeading({ accent: v })}
+                />
+              </>
+            ) : (
+              <>
+                {heading.plain && `${heading.plain} `}
+                <span className="gold-text">{heading.accent}</span>
+              </>
+            )}
           </h3>
         </div>
 

@@ -13,7 +13,7 @@ export default function Hero() {
   const isEditing = useIsEditing();
   const update = useUpdatePortfolioData();
   const blobConfigured = useBlobConfigured();
-  const { name, role, tagline, avatarUrl, resumeUrl } = portfolioData.personalInfo;
+  const { name, role, tagline, avatarUrl, resumeUrl, greeting, statusPill } = portfolioData.personalInfo;
   const firstName = name.split(" ")[0];
   const restName = name.split(" ").slice(1).join(" ");
 
@@ -87,7 +87,15 @@ export default function Hero() {
           <motion.div variants={itemVariants} className="self-start">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#2a231a] bg-white/5 text-[10px] font-mono tracking-widest uppercase text-[#e8dcc4] font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Available for Freelance &amp; Contract
+              {isEditing ? (
+                <EditableText
+                  as="span"
+                  value={statusPill}
+                  onCommit={(v) => update((d) => ({ ...d, personalInfo: { ...d.personalInfo, statusPill: v } }))}
+                />
+              ) : (
+                statusPill
+              )}
             </span>
           </motion.div>
 
@@ -97,7 +105,15 @@ export default function Hero() {
               variants={itemVariants}
               className="text-sm font-mono tracking-wider uppercase text-[#a89a83]"
             >
-              Hi there, I am
+              {isEditing ? (
+                <EditableText
+                  as="span"
+                  value={greeting}
+                  onCommit={(v) => update((d) => ({ ...d, personalInfo: { ...d.personalInfo, greeting: v } }))}
+                />
+              ) : (
+                greeting
+              )}
             </motion.p>
             <motion.h1
               variants={itemVariants}

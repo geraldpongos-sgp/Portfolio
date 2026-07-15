@@ -32,7 +32,14 @@ export default function Projects() {
   const update = useUpdatePortfolioData();
   const blobConfigured = useBlobConfigured();
   const { projects } = portfolioData;
+  const heading = portfolioData.sectionHeadings.projects;
   const [activeVideo, setActiveVideo] = useState<Project | null>(null);
+
+  const updateHeading = (patch: Partial<typeof heading>) =>
+    update((d) => ({
+      ...d,
+      sectionHeadings: { ...d.sectionHeadings, projects: { ...d.sectionHeadings.projects, ...patch } },
+    }));
 
   if (projects.length === 0 && !isEditing) return null;
 
@@ -71,7 +78,21 @@ export default function Projects() {
             <div className="h-px bg-[#2a231a] flex-grow" />
           </div>
           <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl tracking-tight text-[#f5efe4]">
-            Work <span className="gold-text">Samples</span>
+            {isEditing ? (
+              <>
+                <EditableText as="span" value={heading.plain} onCommit={(v) => updateHeading({ plain: v })} />{" "}
+                <EditableText
+                  as="span"
+                  className="gold-text"
+                  value={heading.accent}
+                  onCommit={(v) => updateHeading({ accent: v })}
+                />
+              </>
+            ) : (
+              <>
+                {heading.plain} <span className="gold-text">{heading.accent}</span>
+              </>
+            )}
           </h3>
           {isEditing && projects.length === 0 && (
             <p className="text-sm text-[#a89a83] mt-3">

@@ -12,6 +12,13 @@ export default function About() {
   const isEditing = useIsEditing();
   const update = useUpdatePortfolioData();
   const { bioFull, stats } = portfolioData.personalInfo;
+  const heading = portfolioData.sectionHeadings.about;
+
+  const updateHeading = (patch: Partial<typeof heading>) =>
+    update((d) => ({
+      ...d,
+      sectionHeadings: { ...d.sectionHeadings, about: { ...d.sectionHeadings.about, ...patch } },
+    }));
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -64,7 +71,21 @@ export default function About() {
                 variants={itemVariants}
                 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl tracking-tight text-[#f5efe4]"
               >
-                Reliable support <span className="gold-text">behind every great store.</span>
+                {isEditing ? (
+                  <>
+                    <EditableText as="span" value={heading.plain} onCommit={(v) => updateHeading({ plain: v })} />{" "}
+                    <EditableText
+                      as="span"
+                      className="gold-text"
+                      value={heading.accent}
+                      onCommit={(v) => updateHeading({ accent: v })}
+                    />
+                  </>
+                ) : (
+                  <>
+                    {heading.plain} <span className="gold-text">{heading.accent}</span>
+                  </>
+                )}
               </motion.h3>
 
               <motion.div

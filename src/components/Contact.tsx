@@ -11,6 +11,13 @@ export default function Contact() {
   const isEditing = useIsEditing();
   const update = useUpdatePortfolioData();
   const { heading, blurb, email, phone, address, messagePlaceholder } = portfolioData.contact;
+  const sectionHeading = portfolioData.sectionHeadings.contact;
+
+  const updateSectionHeading = (patch: Partial<typeof sectionHeading>) =>
+    update((d) => ({
+      ...d,
+      sectionHeadings: { ...d.sectionHeadings, contact: { ...d.sectionHeadings.contact, ...patch } },
+    }));
 
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +83,25 @@ export default function Contact() {
             <div className="h-px bg-[#2a231a] flex-grow" />
           </div>
           <h3 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl tracking-tight text-[#f5efe4]">
-            Let&apos;s Talk <span className="gold-text">Shop</span>
+            {isEditing ? (
+              <>
+                <EditableText
+                  as="span"
+                  value={sectionHeading.plain}
+                  onCommit={(v) => updateSectionHeading({ plain: v })}
+                />{" "}
+                <EditableText
+                  as="span"
+                  className="gold-text"
+                  value={sectionHeading.accent}
+                  onCommit={(v) => updateSectionHeading({ accent: v })}
+                />
+              </>
+            ) : (
+              <>
+                {sectionHeading.plain} <span className="gold-text">{sectionHeading.accent}</span>
+              </>
+            )}
           </h3>
         </div>
 

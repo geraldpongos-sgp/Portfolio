@@ -15,16 +15,25 @@ async function getRedis() {
   });
 }
 
+function mergeWithDefaults(data: Partial<PortfolioData>): PortfolioData {
+  return {
+    ...defaultPortfolioData,
+    ...data,
+    personalInfo: { ...defaultPortfolioData.personalInfo, ...data.personalInfo },
+    contact: { ...defaultPortfolioData.contact, ...data.contact },
+  };
+}
+
 export async function getContent(): Promise<PortfolioData> {
   try {
     if (hasRedis) {
       const redis = await getRedis();
       const data = await redis.get<PortfolioData>(CONTENT_KEY);
-      return data ? { ...defaultPortfolioData, ...data } : defaultPortfolioData;
+      return data ? mergeWithDefaults(data) : defaultPortfolioData;
     }
     const raw = await fs.readFile(LOCAL_FILE, "utf-8");
     const data = JSON.parse(raw) as PortfolioData;
-    return { ...defaultPortfolioData, ...data };
+    return mergeWithDefaults(data);
   } catch {
     return defaultPortfolioData;
   }

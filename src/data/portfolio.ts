@@ -2,6 +2,8 @@ export interface PersonalInfo {
   name: string;
   role: string;
   tagline: string;
+  greeting: string;
+  statusPill: string;
   bioShort: string;
   bioFull: string;
   avatarUrl: string;
@@ -72,6 +74,21 @@ export interface WhyChooseUsItem {
   thumbnailUrl?: string;
 }
 
+export interface SectionHeading {
+  plain: string;
+  accent: string;
+}
+
+export interface SectionHeadings {
+  about: SectionHeading;
+  skills: SectionHeading;
+  services: SectionHeading;
+  experience: SectionHeading;
+  whyChooseUs: SectionHeading;
+  projects: SectionHeading;
+  contact: SectionHeading;
+}
+
 export interface PortfolioData {
   personalInfo: PersonalInfo;
   toolCategories: ToolCategory[];
@@ -82,6 +99,7 @@ export interface PortfolioData {
   whyChooseUs: WhyChooseUsItem[];
   projects: Project[];
   contact: ContactInfo;
+  sectionHeadings: SectionHeadings;
 }
 
 export const defaultPortfolioData: PortfolioData = {
@@ -89,6 +107,8 @@ export const defaultPortfolioData: PortfolioData = {
     name: "Gerald Pongos",
     role: "eCommerce Virtual Assistant",
     tagline: "Helping online stores grow through product research, listing optimization, and reliable marketplace operations.",
+    greeting: "Hi there, I am",
+    statusPill: "Available for Freelance & Contract",
     bioShort: "Dedicated eCommerce Virtual Assistant experienced in Shopify, eBay, and Amazon store operations.",
     bioFull: "A dedicated and detail-oriented eCommerce Virtual Assistant with experience in Shopify, eBay, Amazon, etc. Identifies winning products through market, competitor, and trend analysis, product management, product pricing, marketplace operations, and data entry. Skilled in maintaining accurate product catalogs, updating pricing, managing inventory, and supporting online store operations. Quick to learn new eCommerce tools and committed to helping businesses grow through efficiency, organization, and outstanding customer service.",
     avatarUrl: "/images/gerald_portrait.png",
@@ -227,5 +247,14 @@ export const defaultPortfolioData: PortfolioData = {
     phone: "+63 9310603505",
     address: "Bacolod City, Philippines",
     messagePlaceholder: "Tell me about your store, target timeline, or just say hello...",
+  },
+  sectionHeadings: {
+    about: { plain: "Reliable support", accent: "behind every great store." },
+    skills: { plain: "Tools", accent: "& Platforms" },
+    services: { plain: "Why Work", accent: "With Me?" },
+    experience: { plain: "Work", accent: "Experience" },
+    whyChooseUs: { plain: "", accent: "Projects" },
+    projects: { plain: "Work", accent: "Samples" },
+    contact: { plain: "Let's Talk", accent: "Shop" },
   },
 };
