@@ -63,12 +63,23 @@ export interface Project {
   videoUrl?: string;
 }
 
+export interface WhyChooseUsItem {
+  title: string;
+  navLabel?: string;
+  subtitle?: string;
+  sideText?: string;
+  description: string;
+  thumbnailUrl?: string;
+}
+
 export interface PortfolioData {
   personalInfo: PersonalInfo;
   toolCategories: ToolCategory[];
   services: Service[];
   servicesQuote: string;
   experiences: Experience[];
+  whyChooseUsSubtitle: string;
+  whyChooseUs: WhyChooseUsItem[];
   projects: Project[];
   contact: ContactInfo;
 }
@@ -186,6 +197,25 @@ export const defaultPortfolioData: PortfolioData = {
         "Maintained high customer satisfaction through timely support.",
       ],
       tags: ["Technical Support", "Remote Tools", "Customer Service", "Documentation"],
+    },
+  ],
+  whyChooseUsSubtitle: "Select a Project",
+  whyChooseUs: [
+    {
+      title: "Why Choose Me?",
+      description: "I bring consistency, accuracy, and attention to detail to every task — from product research to order fulfillment — so store owners can focus on growth instead of day-to-day operations.",
+    },
+    {
+      title: "My Commitment",
+      description: "I show up on time, communicate clearly, and follow through on every task. Reliability isn't a bonus — it's the baseline I hold myself to.",
+    },
+    {
+      title: "My Story",
+      description: "After years in retail management and technical support, I moved into eCommerce virtual assistance to combine my operations background with a growing passion for online business.",
+    },
+    {
+      title: "My Vision",
+      description: "To become a trusted long-term partner for eCommerce brands — helping them scale smoothly by handling the operational details with care and precision.",
     },
   ],
   projects: [],

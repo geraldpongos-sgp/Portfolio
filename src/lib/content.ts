@@ -20,10 +20,11 @@ export async function getContent(): Promise<PortfolioData> {
     if (hasRedis) {
       const redis = await getRedis();
       const data = await redis.get<PortfolioData>(CONTENT_KEY);
-      return data ?? defaultPortfolioData;
+      return data ? { ...defaultPortfolioData, ...data } : defaultPortfolioData;
     }
     const raw = await fs.readFile(LOCAL_FILE, "utf-8");
-    return JSON.parse(raw) as PortfolioData;
+    const data = JSON.parse(raw) as PortfolioData;
+    return { ...defaultPortfolioData, ...data };
   } catch {
     return defaultPortfolioData;
   }

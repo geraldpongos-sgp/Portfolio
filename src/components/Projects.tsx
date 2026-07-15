@@ -66,7 +66,7 @@ export default function Projects() {
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-xs font-mono tracking-widest uppercase text-[#a89a83]">
-              05 // SAMPLES
+              06 // SAMPLES
             </span>
             <div className="h-px bg-[#2a231a] flex-grow" />
           </div>

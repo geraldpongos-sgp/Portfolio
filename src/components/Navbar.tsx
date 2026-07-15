@@ -13,6 +13,7 @@ const baseNavLinks = [
   { name: "Skills", href: "#skills" },
   { name: "Services", href: "#services" },
   { name: "Experience", href: "#experience" },
+  { name: "Highlights", href: "#highlights" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -21,7 +22,7 @@ export default function Navbar() {
   const isEditing = useIsEditing();
   const update = useUpdatePortfolioData();
   const navLinks = portfolioData.projects.length > 0
-    ? [...baseNavLinks.slice(0, 4), { name: "Projects", href: "#projects" }, ...baseNavLinks.slice(4)]
+    ? [...baseNavLinks.slice(0, 6), { name: "Projects", href: "#projects" }, ...baseNavLinks.slice(6)]
     : baseNavLinks;
 
   const [activeSection, setActiveSection] = useState("hero");
