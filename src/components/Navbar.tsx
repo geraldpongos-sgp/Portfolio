@@ -140,32 +140,61 @@ export default function Navbar() {
           {/* Socials / Action Button */}
           <div className="hidden md:flex items-center space-x-4">
             {isEditing ? (
-              <div className="flex items-center gap-1.5">
-                <Linkedin size={14} className="text-[#a89a83] shrink-0" />
-                <EditableText
-                  value={portfolioData.personalInfo.socials.linkedin || ""}
-                  placeholder="LinkedIn URL"
-                  className="text-[10px] font-mono text-[#a89a83] max-w-[160px] inline-block"
-                  onCommit={(v) =>
-                    update((d) => ({
-                      ...d,
-                      personalInfo: { ...d.personalInfo, socials: { ...d.personalInfo.socials, linkedin: v } },
-                    }))
-                  }
-                />
-              </div>
+              <>
+                <div className="flex items-center gap-1.5">
+                  <Linkedin size={14} className="text-[#a89a83] shrink-0" />
+                  <EditableText
+                    value={portfolioData.personalInfo.socials.linkedin || ""}
+                    placeholder="LinkedIn URL"
+                    className="text-[10px] font-mono text-[#a89a83] max-w-[160px] inline-block"
+                    onCommit={(v) =>
+                      update((d) => ({
+                        ...d,
+                        personalInfo: { ...d.personalInfo, socials: { ...d.personalInfo.socials, linkedin: v } },
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Github size={14} className="text-[#a89a83] shrink-0" />
+                  <EditableText
+                    value={portfolioData.personalInfo.socials.github || ""}
+                    placeholder="GitHub URL"
+                    className="text-[10px] font-mono text-[#a89a83] max-w-[160px] inline-block"
+                    onCommit={(v) =>
+                      update((d) => ({
+                        ...d,
+                        personalInfo: { ...d.personalInfo, socials: { ...d.personalInfo.socials, github: v } },
+                      }))
+                    }
+                  />
+                </div>
+              </>
             ) : (
-              portfolioData.personalInfo.socials.linkedin && (
-                <a
-                  href={portfolioData.personalInfo.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#a89a83] hover:text-[#e8b654] transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin size={18} />
-                </a>
-              )
+              <>
+                {portfolioData.personalInfo.socials.linkedin && (
+                  <a
+                    href={portfolioData.personalInfo.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#a89a83] hover:text-[#e8b654] transition-colors"
+                    aria-label="LinkedIn Profile"
+                  >
+                    <Linkedin size={18} />
+                  </a>
+                )}
+                {portfolioData.personalInfo.socials.github && (
+                  <a
+                    href={portfolioData.personalInfo.socials.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#a89a83] hover:text-[#e8b654] transition-colors"
+                    aria-label="GitHub Profile"
+                  >
+                    <Github size={18} />
+                  </a>
+                )}
+              </>
             )}
             <a
               href="#contact"
