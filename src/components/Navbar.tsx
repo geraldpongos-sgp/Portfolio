@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Linkedin, Facebook, Instagram } from "./icons";
+import { Linkedin, Facebook, Instagram, Github } from "./icons";
 import { usePortfolioData, useIsEditing, useUpdatePortfolioData } from "./PortfolioProvider";
 import { EditableText } from "./editing/EditableText";
 
@@ -301,6 +301,20 @@ export default function Navbar() {
                 }
               />
             </div>
+            <div className="flex items-center gap-1.5 bg-[#0d0b09] border border-[#2a231a] rounded-full pl-2 pr-3 py-1">
+              <Github size={13} className="text-[#a89a83] shrink-0" />
+              <EditableText
+                value={portfolioData.personalInfo.socials.github || ""}
+                placeholder="GitHub URL"
+                className="text-[10px] font-mono text-[#a89a83] max-w-[140px] inline-block"
+                onCommit={(v) =>
+                  update((d) => ({
+                    ...d,
+                    personalInfo: { ...d.personalInfo, socials: { ...d.personalInfo.socials, github: v } },
+                  }))
+                }
+              />
+            </div>
           </>
         ) : (
           <>
@@ -340,6 +354,19 @@ export default function Navbar() {
                 <Instagram size={14} />
                 <span className="absolute left-8 top-1/2 -translate-y-1/2 px-2 py-0.5 gold-fill text-[#050403] text-[9px] font-mono font-bold tracking-wider rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                   Instagram
+                </span>
+              </a>
+            )}
+            {portfolioData.personalInfo.socials.github && (
+              <a
+                href={portfolioData.personalInfo.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center justify-center w-7 h-7 rounded-full text-[#a89a83] hover:text-[#050403] hover:bg-[#e8b654] hover:scale-125 transition-all duration-200"
+              >
+                <Github size={14} />
+                <span className="absolute left-8 top-1/2 -translate-y-1/2 px-2 py-0.5 gold-fill text-[#050403] text-[9px] font-mono font-bold tracking-wider rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  GitHub
                 </span>
               </a>
             )}
