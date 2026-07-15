@@ -9,7 +9,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       body,
       request,
       onBeforeGenerateToken: async () => ({
-        allowedContentTypes: ["image/*", "video/*"],
+        allowedContentTypes: ["image/*", "video/*", "application/pdf"],
         maximumSizeInBytes: 200 * 1024 * 1024,
       }),
       onUploadCompleted: async () => {},

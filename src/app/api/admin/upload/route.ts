@@ -11,8 +11,9 @@ export async function POST(req: NextRequest) {
 
   const isImage = file.type.startsWith("image/");
   const isVideo = file.type.startsWith("video/");
-  if (!isImage && !isVideo) {
-    return NextResponse.json({ error: "Only image or video files are allowed." }, { status: 400 });
+  const isPdf = file.type === "application/pdf";
+  if (!isImage && !isVideo && !isPdf) {
+    return NextResponse.json({ error: "Only image, video, or PDF files are allowed." }, { status: 400 });
   }
 
   const maxSize = isVideo ? 100 * 1024 * 1024 : 10 * 1024 * 1024;

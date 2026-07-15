@@ -176,14 +176,19 @@ export default function Hero() {
             </a>
             {isEditing ? (
               <div className="flex flex-col gap-1.5">
-                <span className="group border border-[#e8b654]/40 text-[#e8dcc4] px-8 py-4 rounded-full font-semibold text-sm inline-flex items-center justify-center gap-2">
-                  <FileText size={16} />
-                  Read Resume
-                </span>
+                <EditableImage
+                  inline
+                  accept="application/pdf"
+                  label="Upload New Resume"
+                  blobConfigured={blobConfigured}
+                  onUploaded={(url) =>
+                    update((d) => ({ ...d, personalInfo: { ...d.personalInfo, resumeUrl: url } }))
+                  }
+                />
                 <EditableText
                   value={resumeUrl}
                   className="text-[10px] text-[#a89a83] font-mono text-center"
-                  placeholder="Resume URL..."
+                  placeholder="...or paste a resume URL"
                   onCommit={(v) => update((d) => ({ ...d, personalInfo: { ...d.personalInfo, resumeUrl: v } }))}
                 />
               </div>
