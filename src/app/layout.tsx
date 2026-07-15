@@ -124,7 +124,10 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#050403] text-[#f5efe4]">
+      <body
+        className="min-h-full flex flex-col bg-[#050403] text-[#f5efe4]"
+        suppressHydrationWarning
+      >
         <PortfolioProvider data={content}>{children}</PortfolioProvider>
       </body>
     </html>

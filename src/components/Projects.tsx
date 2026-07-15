@@ -3,12 +3,28 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Play, X, ExternalLink, ImageIcon } from "lucide-react";
+import { Play, X, ImageIcon } from "lucide-react";
 import { usePortfolioData, useIsEditing, useUpdatePortfolioData, useBlobConfigured } from "./PortfolioProvider";
 import { Project } from "@/data/portfolio";
 import { EditableText } from "./editing/EditableText";
 import { EditableImage } from "./editing/EditableImage";
 import { AddTile, RemoveButton } from "./editing/EditControls";
+
+function getDescriptionBullets(description: string): string[] {
+  const byNewline = description
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  if (byNewline.length > 1) return byNewline;
+
+  const byNumbering = description
+    .split(/(?:^|\s)\d+\.\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+  if (byNumbering.length > 1) return byNumbering;
+
+  return description.trim() ? [description.trim()] : [];
+}
 
 export default function Projects() {
   const portfolioData = usePortfolioData();
@@ -130,29 +146,52 @@ export default function Projects() {
                   <h4 className="text-lg font-bold text-[#f5efe4] truncate">{project.title}</h4>
                 )}
                 {isEditing ? (
-                  <EditableText
-                    as="p"
-                    multiline
-                    value={project.description}
-                    className="text-sm text-[#a89a83] leading-relaxed flex-1"
-                    onCommit={(v) => updateProject(project.id, { description: v })}
-                  />
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <ul className="space-y-1.5">
+                      {getDescriptionBullets(project.description).map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#a89a83] leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#e8b654] mt-2 flex-shrink-0" />
+                          <EditableText
+                            as="span"
+                            value={bullet}
+                            className="flex-1"
+                            onCommit={(v) => {
+                              const bullets = [...getDescriptionBullets(project.description)];
+                              bullets[idx] = v;
+                              updateProject(project.id, { description: bullets.join("\n") });
+                            }}
+                          />
+                          <RemoveButton
+                            size={9}
+                            className="w-4 h-4 shrink-0"
+                            onClick={() => {
+                              const bullets = getDescriptionBullets(project.description).filter((_, i) => i !== idx);
+                              updateProject(project.id, { description: bullets.join("\n") });
+                            }}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                    <AddTile
+                      label="Add Bullet"
+                      className="py-1.5 text-xs"
+                      onClick={() => {
+                        const bullets = [...getDescriptionBullets(project.description), "New point"];
+                        updateProject(project.id, { description: bullets.join("\n") });
+                      }}
+                    />
+                  </div>
                 ) : (
-                  <p className="text-sm text-[#a89a83] leading-relaxed flex-1">{project.description}</p>
+                  <ul className="text-sm text-[#a89a83] leading-relaxed flex-1 list-disc pl-4 space-y-1">
+                    {getDescriptionBullets(project.description).map((bullet, i) => (
+                      <li key={i}>{bullet}</li>
+                    ))}
+                  </ul>
                 )}
 
-                {isEditing ? (
+                {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
                     <label className="text-[10px] font-mono uppercase tracking-wider text-[#5c5142]">
-                      Link URL
-                    </label>
-                    <EditableText
-                      value={project.link || ""}
-                      placeholder="https://..."
-                      className="text-xs text-[#e8b654] font-mono"
-                      onCommit={(v) => updateProject(project.id, { link: v })}
-                    />
-                    <label className="text-[10px] font-mono uppercase tracking-wider text-[#5c5142] mt-1">
                       Video
                     </label>
                     <EditableImage
@@ -163,17 +202,6 @@ export default function Projects() {
                       onUploaded={(url) => updateProject(project.id, { videoUrl: url })}
                     />
                   </div>
-                ) : (
-                  project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e8b654] hover:text-[#f5efe4] transition-colors mt-2"
-                    >
-                      View <ExternalLink size={13} />
-                    </a>
-                  )
                 )}
               </div>
             </motion.div>
@@ -194,7 +222,6 @@ export default function Projects() {
                       description: "",
                       thumbnailUrl: "",
                       videoUrl: "",
-                      link: "",
                     },
                   ],
                 }))

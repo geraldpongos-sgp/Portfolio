@@ -61,7 +61,6 @@ export interface Project {
   description: string;
   thumbnailUrl: string;
   videoUrl?: string;
-  link?: string;
 }
 
 export interface PortfolioData {
