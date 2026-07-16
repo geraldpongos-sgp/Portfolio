@@ -203,13 +203,30 @@ export default function Projects() {
                     />
                   </div>
                 ) : (
-                  <ul className="text-sm text-[#a89a83] leading-relaxed flex-1 list-disc pl-4 space-y-1">
-                    {getDescriptionBullets(project.description).map((bullet, i) => (
-                      <li key={i}>{bullet}</li>
-                    ))}
-                  </ul>
-                )}
+  <>
+    <ul className="text-sm text-[#a89a83] leading-relaxed flex-1 list-disc pl-4 space-y-1">
+      {getDescriptionBullets(project.description).map((bullet, i) => (
+        <li key={i}>{bullet}</li>
+      ))}
+    </ul>
 
+    {/* Rating */}
+    <div className="flex items-center gap-2 mt-3">
+      <div className="flex text-[#e8b654]">
+        ★★★★★
+      </div>
+
+      <span className="text-sm font-semibold text-[#f5efe4]">
+        5.0
+      </span>
+
+      <span className="text-sm text-[#a89a83]">
+        (12)
+      </span>
+    </div>
+  </>
+)}
+          
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
                     <label className="text-[10px] font-mono uppercase tracking-wider text-[#5c5142]">
