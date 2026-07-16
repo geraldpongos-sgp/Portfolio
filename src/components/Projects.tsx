@@ -212,16 +212,16 @@ export default function Projects() {
 
     {/* Rating */}
     <div className="flex items-center gap-2 mt-3">
-      <div className="flex text-[#e8b654]">
-        ★★★★★
-      </div>
+      <div className="flex text-[#e8b654] text-base">
+  ★★★★☆
+</div>
 
       <span className="text-sm font-semibold text-[#f5efe4]">
-        5.0
+        4.9
       </span>
 
       <span className="text-sm text-[#a89a83]">
-        (12)
+        (25)
       </span>
     </div>
   </>
@@ -260,6 +260,9 @@ export default function Projects() {
                       description: "",
                       thumbnailUrl: "",
                       videoUrl: "",
+
+                       rating: "5.0",
+                       reviews: "0",
                     },
                   ],
                 }))
