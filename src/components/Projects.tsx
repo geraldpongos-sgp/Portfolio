@@ -211,21 +211,43 @@ export default function Projects() {
     </ul>
 
     {/* Rating */}
-    <div className="flex items-center gap-2 mt-3">
-      <div className="flex text-[#e8b654] text-base">
-  ★★★★☆
-</div>
+   <div className="mt-3 flex items-center gap-2">
+  <div className="flex text-[#e8b654]">
+    ★★★★★
+  </div>
 
+  {isEditing ? (
+    <>
+      <EditableText
+        as="span"
+        value={project.rating}
+        className="text-sm font-semibold text-[#f5efe4]"
+        onCommit={(v) => updateProject(project.id, { rating: v })}
+      />
+
+      <EditableText
+        as="span"
+        value={`(${project.reviews})`}
+        className="text-sm text-[#a89a83]"
+        onCommit={(v) =>
+          updateProject(project.id, {
+            reviews: v.replace(/[()]/g, ""),
+          })
+        }
+      />
+    </>
+  ) : (
+    <>
       <span className="text-sm font-semibold text-[#f5efe4]">
-        4.9
+        {project.rating}
       </span>
 
       <span className="text-sm text-[#a89a83]">
-        (25)
+        ({project.reviews})
       </span>
-    </div>
-  </>
-)}
+    </>
+  )}
+</div>
           
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
@@ -255,14 +277,14 @@ export default function Projects() {
                   projects: [
                     ...d.projects,
                     {
-                      id: crypto.randomUUID(),
-                      title: "New Project",
-                      description: "",
-                      thumbnailUrl: "",
-                      videoUrl: "",
+                     id: "...",
+                     title: "How to Compute the Break-Even",
+                     description: "...",
+                     thumbnailUrl: "...",
+                    videoUrl: "...",
 
-                       rating: "5.0",
-                       reviews: "0",
+                     rating: "4.9",
+                     reviews: "12",
                     },
                   ],
                 }))
