@@ -277,14 +277,14 @@ export default function Projects() {
                   projects: [
                     ...d.projects,
                     {
-                     id: "...",
-                     title: "How to Compute the Break-Even",
-                     description: "...",
-                     thumbnailUrl: "...",
-                    videoUrl: "...",
+                     id: crypto.randomUUID(),
+                     title: "New Project",
+                     description: "",
+                     thumbnailUrl: "",
+                     videoUrl: "",
 
-                     rating: "4.9",
-                     reviews: "12",
+                     rating: "5.0",
+                     reviews: "0",
                     },
                   ],
                 }))
