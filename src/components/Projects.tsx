@@ -210,6 +210,12 @@ export default function Projects() {
         <li key={i}>{bullet}</li>
       ))}
     </ul>
+    {/* Rating */}
+<div className="flex items-center justify-end mt-4">
+  <div className="flex text-[#e8b654] text-xl">
+    ★★★★★
+  </div>
+</div>
 </>
 )}
                 {isEditing && (
