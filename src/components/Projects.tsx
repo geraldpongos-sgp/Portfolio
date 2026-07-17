@@ -210,8 +210,6 @@ export default function Projects() {
       ))}
     </ul>
 
-    {/* Rating */}
-  
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
                     <label className="text-[10px] font-mono uppercase tracking-wider text-[#5c5142]">
