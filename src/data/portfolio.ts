@@ -73,6 +73,7 @@ export interface WhyChooseUsItem {
   sideText?: string;
   description: string;
   thumbnailUrl?: string;
+  rating?: number;
 }
 
 export interface SectionHeading {
