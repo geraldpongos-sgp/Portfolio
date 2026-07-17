@@ -302,27 +302,19 @@ export default function WhyChooseUs() {
             ))}
           </ul>
 
-          <div className="flex justify-end mt-6">
-  <div className="flex items-center gap-1 text-[#e8b654]">
-    <Star size={16} fill="currentColor" />
+          <div className="flex items-center justify-end gap-2 mt-4">
+  <span className="text-[#e8b654]">★★★★★</span>
 
-    {isEditing ? (
-      <EditableText
-        as="span"
-        value={String(active.rating ?? 5)}
-        className="text-sm font-semibold"
-        onCommit={(v) =>
-          updateItem(safeIndex, {
-            rating: Number(v),
-          })
-        }
-      />
-    ) : (
-      <span className="text-sm font-semibold">
-        {active.rating ?? 5}
-      </span>
-    )}
-  </div>
+  <EditableText
+    as="span"
+    value={String(active.rating ?? 5)}
+    className="text-sm font-semibold text-[#f5efe4]"
+    onCommit={(v) =>
+      updateItem(safeIndex, {
+        rating: parseFloat(v) || 5,
+      })
+    }
+  />
 </div>
         </>
       )}
