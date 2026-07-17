@@ -156,6 +156,7 @@ export default function Projects() {
                 )}
               </div>
               <div className="p-5 flex flex-col gap-2 flex-1">
+             
                 {isEditing ? (
                   <EditableText
                     as="h4"
@@ -209,7 +210,8 @@ export default function Projects() {
         <li key={i}>{bullet}</li>
       ))}
     </ul>
-
+</>
+)}
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
                     <label className="text-[10px] font-mono uppercase tracking-wider text-[#5c5142]">
