@@ -206,11 +206,20 @@ export default function Projects() {
                 ) : (
   <>
     <ul className="text-sm text-[#a89a83] leading-relaxed flex-1 list-disc pl-4 space-y-1">
+
       {getDescriptionBullets(project.description).map((bullet, i) => (
         <li key={i}>{bullet}</li>
       ))}
     </ul>
+    {/* Rating */}
+<div className="flex items-center justify-end mt-4">
+  <div className="flex text-[#e8b654] text-xl">
+    ★★★★★
+  </div>
+</div>
+
    </>
+
 )}
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
