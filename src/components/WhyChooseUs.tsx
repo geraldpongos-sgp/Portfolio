@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, Star } from "lucide-react";
 import { usePortfolioData, useIsEditing, useUpdatePortfolioData, useBlobConfigured } from "./PortfolioProvider";
 import { WhyChooseUsItem } from "@/data/portfolio";
 import { EditableText } from "./editing/EditableText";
@@ -169,122 +169,157 @@ export default function WhyChooseUs() {
             )}
           </div>
 
-          {/* Content Panel */}
-          <div className="gold-border rounded-2xl p-8 md:p-10 bg-[#14100c]">
-            {active ? (
-              <>
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 bg-[#0d0b09] border-2 border-[#e8b654]/50 flex items-center justify-center">
-                    {active.thumbnailUrl ? (
-                      <Image src={active.thumbnailUrl} alt={active.title} fill className="object-cover" />
-                    ) : (
-                      <ImageIcon size={22} className="text-[#5c5142]" />
-                    )}
-                    {isEditing && (
-                      <EditableImage
-                        blobConfigured={blobConfigured}
-                        label="Change Icon"
-                        className="rounded-full"
-                        onUploaded={(url) => updateItem(safeIndex, { thumbnailUrl: url })}
-                      />
-                    )}
-                  </div>
-                  <div className="flex-1 flex items-end justify-between gap-3">
-                    <div className="flex flex-col gap-0.5">
-                      {isEditing ? (
-                        <EditableText
-                          as="h4"
-                          value={active.title}
-                          className="text-2xl md:text-3xl font-bold tracking-tight text-[#f5efe4]"
-                          onCommit={(v) => updateItem(safeIndex, { title: v })}
-                        />
-                      ) : (
-                        <h4 className="text-2xl md:text-3xl font-bold tracking-tight text-[#f5efe4]">
-                          {active.title}
-                        </h4>
-                      )}
-                      {isEditing ? (
-                        <EditableText
-                          as="p"
-                          value={active.subtitle || ""}
-                          placeholder="Add a subtitle..."
-                          className="text-sm text-[#a89a83]"
-                          onCommit={(v) => updateItem(safeIndex, { subtitle: v })}
-                        />
-                      ) : (
-                        active.subtitle && (
-                          <p className="text-sm text-[#a89a83]">{active.subtitle}</p>
-                        )
-                      )}
-                    </div>
-                    {isEditing ? (
-                      <EditableText
-                        as="span"
-                        value={active.sideText || ""}
-                        placeholder="Add text..."
-                        className="text-xs font-mono text-[#a89a83] shrink-0 text-right"
-                        onCommit={(v) => updateItem(safeIndex, { sideText: v })}
-                      />
-                    ) : (
-                      active.sideText && (
-                        <span className="text-xs font-mono text-[#a89a83] shrink-0 text-right">
-                          {active.sideText}
-                        </span>
-                      )
-                    )}
-                  </div>
-                </div>
-                {isEditing ? (
-                  <div className="flex flex-col gap-1.5">
-                    <ul className="space-y-1.5">
-                      {getDescriptionBullets(active.description).map((bullet, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm md:text-base text-[#a89a83] leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#e8b654] mt-2 flex-shrink-0" />
-                          <EditableText
-                            as="span"
-                            value={bullet}
-                            className="flex-1"
-                            onCommit={(v) => {
-                              const bullets = [...getDescriptionBullets(active.description)];
-                              bullets[idx] = v;
-                              updateItem(safeIndex, { description: bullets.join("\n") });
-                            }}
-                          />
-                          <RemoveButton
-                            size={9}
-                            className="w-4 h-4 shrink-0"
-                            onClick={() => {
-                              const bullets = getDescriptionBullets(active.description).filter((_, i) => i !== idx);
-                              updateItem(safeIndex, { description: bullets.join("\n") });
-                            }}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                    <AddTile
-                      label="Add Bullet"
-                      className="py-1.5 text-xs"
-                      onClick={() => {
-                        const bullets = [...getDescriptionBullets(active.description), "New point"];
-                        updateItem(safeIndex, { description: bullets.join("\n") });
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <ul className="text-sm md:text-base text-[#a89a83] leading-relaxed list-disc pl-4 space-y-1.5">
-                    {getDescriptionBullets(active.description).map((bullet, i) => (
-                      <li key={i}>{bullet}</li>
-                    ))}
-                  </ul>
-                )}
-              </>
+     {/* Content Panel */}
+<div className="gold-border rounded-2xl p-8 md:p-10 bg-[#14100c]">
+  {active ? (
+    <>
+      <div className="flex items-start gap-4 mb-4">
+        <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 bg-[#0d0b09] border-2 border-[#e8b654]/50 flex items-center justify-center">
+          {active.thumbnailUrl ? (
+            <Image
+              src={active.thumbnailUrl}
+              alt={active.title}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <ImageIcon size={22} className="text-[#5c5142]" />
+          )}
+
+          {isEditing && (
+            <EditableImage
+              blobConfigured={blobConfigured}
+              label="Change Icon"
+              className="rounded-full"
+              onUploaded={(url) =>
+                updateItem(safeIndex, { thumbnailUrl: url })
+              }
+            />
+          )}
+        </div>
+
+        <div className="flex-1 flex items-end justify-between gap-3">
+          <div>
+            {isEditing ? (
+              <EditableText
+                as="h4"
+                value={active.title}
+                className="text-2xl md:text-3xl font-bold tracking-tight text-[#f5efe4]"
+                onCommit={(v) => updateItem(safeIndex, { title: v })}
+              />
             ) : (
-              isEditing && (
-                <p className="text-sm text-[#a89a83]">No tabs yet — add one on the left.</p>
+              <h4 className="text-2xl md:text-3xl font-bold tracking-tight text-[#f5efe4]">
+                {active.title}
+              </h4>
+            )}
+
+            {isEditing ? (
+              <EditableText
+                as="p"
+                value={active.subtitle || ""}
+                className="text-sm text-[#a89a83]"
+                placeholder="Add subtitle..."
+                onCommit={(v) =>
+                  updateItem(safeIndex, { subtitle: v })
+                }
+              />
+            ) : (
+              active.subtitle && (
+                <p className="text-sm text-[#a89a83]">
+                  {active.subtitle}
+                </p>
               )
             )}
           </div>
-        </motion.div>
+
+          {active.sideText && (
+            <span className="text-xs font-mono text-[#a89a83] text-right">
+              {active.sideText}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {isEditing ? (
+        <div className="flex flex-col gap-2">
+          <ul className="space-y-2">
+            {getDescriptionBullets(active.description).map((bullet, idx) => (
+              <li
+                key={idx}
+                className="flex items-start gap-2"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#e8b654] mt-2" />
+
+                <EditableText
+                  as="span"
+                  value={bullet}
+                  className="flex-1 text-[#a89a83]"
+                  onCommit={(v) => {
+                    const bullets = [...getDescriptionBullets(active.description)];
+                    bullets[idx] = v;
+                    updateItem(safeIndex, {
+                      description: bullets.join("\n"),
+                    });
+                  }}
+                />
+
+                <RemoveButton
+                  size={9}
+                  className="w-4 h-4"
+                  onClick={() => {
+                    const bullets = getDescriptionBullets(active.description)
+                      .filter((_, i) => i !== idx);
+
+                    updateItem(safeIndex, {
+                      description: bullets.join("\n"),
+                    });
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+
+          <AddTile
+            label="Add Bullet"
+            className="py-1.5 text-xs"
+            onClick={() => {
+              const bullets = [
+                ...getDescriptionBullets(active.description),
+                "New point",
+              ];
+
+              updateItem(safeIndex, {
+                description: bullets.join("\n"),
+              });
+            }}
+          />
+        </div>
+      ) : (
+        <>
+          <ul className="text-sm md:text-base text-[#a89a83] leading-relaxed list-disc pl-4 space-y-1.5">
+            {getDescriptionBullets(active.description).map((bullet, i) => (
+              <li key={i}>{bullet}</li>
+            ))}
+          </ul>
+
+          <div className="flex justify-end mt-6">
+            <div className="flex items-center gap-1 text-[#e8b654]">
+               <span className="text-lg">★★★★★</span>
+              <span className="text-sm font-semibold">4.9</span>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  ) : (
+    isEditing && (
+      <p className="text-sm text-[#a89a83]">
+        No tabs yet — add one on the left.
+      </p>
+    )
+  )}
+</div>
+    </motion.div>
       </div>
     </section>
   );
