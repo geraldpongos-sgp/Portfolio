@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Play, X, ImageIcon } from "lucide-react";
+import { Play, X, ImageIcon, Star } from "lucide-react";
 import { usePortfolioData, useIsEditing, useUpdatePortfolioData, useBlobConfigured } from "./PortfolioProvider";
 import { Project } from "@/data/portfolio";
 import { EditableText } from "./editing/EditableText";
@@ -210,13 +210,7 @@ export default function Projects() {
         <li key={i}>{bullet}</li>
       ))}
     </ul>
-    {/* Rating */}
-<div className="flex items-center justify-end mt-4">
-  <div className="flex text-[#e8b654] text-xl">
-    ★★★★★
-  </div>
-</div>
-</>
+   </>
 )}
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
@@ -232,8 +226,13 @@ export default function Projects() {
                     />
                   </div>
                 )}
+<div className="flex justify-end mt-4">
+  <div className="flex items-center gap-1 text-[#e8b654]">
+    <Star size={16} fill="currentColor" />
+    <span className="text-sm font-semibold">4.9</span>
+  </div>
+</div>
               </div>
-
             </motion.div>
           ))}
 
