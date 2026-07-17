@@ -64,8 +64,6 @@ export interface Project {
   thumbnailUrl: string;
   videoUrl?: string;
 
-  rating: string;
-  reviews: string;
 }
 
 export interface WhyChooseUsItem {

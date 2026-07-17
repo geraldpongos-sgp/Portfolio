@@ -211,44 +211,7 @@ export default function Projects() {
     </ul>
 
     {/* Rating */}
-   <div className="mt-3 flex items-center gap-2">
-  <div className="flex text-[#e8b654]">
-    ★★★★★
-  </div>
-
-  {isEditing ? (
-    <>
-      <EditableText
-        as="span"
-        value={project.rating}
-        className="text-sm font-semibold text-[#f5efe4]"
-        onCommit={(v) => updateProject(project.id, { rating: v })}
-      />
-
-      <EditableText
-        as="span"
-        value={`(${project.reviews})`}
-        className="text-sm text-[#a89a83]"
-        onCommit={(v) =>
-          updateProject(project.id, {
-            reviews: v.replace(/[()]/g, ""),
-          })
-        }
-      />
-    </>
-  ) : (
-    <>
-      <span className="text-sm font-semibold text-[#f5efe4]">
-        {project.rating}
-      </span>
-
-      <span className="text-sm text-[#a89a83]">
-        ({project.reviews})
-      </span>
-    </>
-  )}
-</div>
-          
+  
                 {isEditing && (
                   <div className="flex flex-col gap-2 mt-2 pt-2 border-t border-[#2a231a]">
                     <label className="text-[10px] font-mono uppercase tracking-wider text-[#5c5142]">
@@ -264,6 +227,7 @@ export default function Projects() {
                   </div>
                 )}
               </div>
+
             </motion.div>
           ))}
 
@@ -283,8 +247,6 @@ export default function Projects() {
                      thumbnailUrl: "",
                      videoUrl: "",
 
-                     rating: "5.0",
-                     reviews: "0",
                     },
                   ],
                 }))
