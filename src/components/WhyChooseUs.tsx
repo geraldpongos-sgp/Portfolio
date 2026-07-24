@@ -262,7 +262,6 @@ export default function WhyChooseUs() {
                     });
                   }}
                 />
-
                 <RemoveButton
                   size={9}
                   className="w-4 h-4"
@@ -301,21 +300,6 @@ export default function WhyChooseUs() {
               <li key={i}>{bullet}</li>
             ))}
           </ul>
-
-          <div className="flex items-center justify-end gap-2 mt-4">
-  <span className="text-[#e8b654]">★★★★★</span>
-
-  <EditableText
-    as="span"
-    value={String(active.rating ?? 5)}
-    className="text-sm font-semibold text-[#f5efe4]"
-    onCommit={(v) =>
-      updateItem(safeIndex, {
-        rating: parseFloat(v) || 5,
-      })
-    }
-  />
-</div>
         </>
       )}
     </>
